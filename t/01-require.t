@@ -1,7 +1,7 @@
 use strict;
 
-use Test::More qw(no_plan);
-#use Test::More tests => 2;
+#use Test::More qw(no_plan);
+use Test::More tests => 18;
 
 use RT;
 RT::LoadConfig;
