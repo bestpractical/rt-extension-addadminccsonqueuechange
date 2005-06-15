@@ -1,0 +1,10 @@
+name: RT-Extension-AddAdminCcsOnQueueChange
+version: 0.01
+abstract: RT Extension-AddAdminCcsOnQueueChange Extension
+license: unknown
+distribution_type: module
+no_index:
+  directory:
+    - etc
+    - inc
+generated_by: Module::Install version 0.36

@@ -1,0 +1,18 @@
+This RT extension adds an "Add Queue AdminCcs as Ticket AdminCcs" action, which
+is installed by default as a global queue action set to trigger when a ticket
+is moved to a new queue.  It adds the *old* queue's AdminCcs to the ticket
+(the thought being that AdminCcs on the old queue will want to be kept "in the
+loop" on action occuring in the new queue, even if they aren't directly in
+control of it).  
+
+Note that as currently implemented the action only works on queue change 
+transactions.  Also, if the scrip is added to a single queue individually 
+instead of all queues globally, it will only run when tickets are moved *into* 
+the queue (although it will correctly add the old queue's AdminCcs to the 
+ticket).  
+
+To install:
+
+    perl Makefile.PL
+    make install
+    make initdb
