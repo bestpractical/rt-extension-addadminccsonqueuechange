@@ -1,11 +1,6 @@
-
-=head1 COPYRIGHT
-
 This extension is Copyright (C) 2005 Best Practical Solutions, LLC.
 
 It is freely redistributable under the terms of version 2 of the GNU GPL.
-
-=cut
 
 This RT extension adds an "Add Queue AdminCcs as Ticket AdminCcs" action, which
 is installed by default as a global queue action set to trigger when a ticket
