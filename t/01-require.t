@@ -49,7 +49,7 @@ ok($id, "Queue created? $message");
 
 # handles a single watcher?
 ($id, $message) = $watched_queue->AddWatcher( Type => 'AdminCc',
-                                              Email => 'watcher1\@example.com'
+                                              Email => 'watcher1@example.com'
                                             );
 ok($id, "Added watcher1? $message");
 
@@ -70,7 +70,7 @@ ok($ticket_1->AdminCcAddresses =~ /watcher1\@example.com/, "Adds AdminCcs on mov
 
 # doesn't add watchers when the ticket gets moved back
 ($id, $message) = $watched_queue->AddWatcher( Type => 'AdminCc',
-                                              Email => 'watcher2\@example.com'
+                                              Email => 'watcher2@example.com'
                                             );
 ok($id, "Added watcher2? $message");
 ($id, $message) = $ticket_1->SetQueue("Watched-$$");
@@ -79,11 +79,15 @@ ok($ticket_1->AdminCcAddresses !~ /watcher2\@example.com/, "Doesn't add AdminCcs
 
 # deals properly with multiple watchers
 ($id, $message) = $watched_queue->AddWatcher( Type => 'AdminCc',
-                                              Email => 'watcher3\@example.com'
+                                              Email => 'watcher3@example.com'
                                             );
 ok($id, "Added watcher3? $message");
 ($id, $message) = $ticket_1->SetQueue("Unwatched-$$");
 ok($id, "Moved ticket? $message");
 ok($ticket_1->AdminCcAddresses =~ /watcher2\@example.com/ && $ticket_1->AdminCcAddresses =~ /watcher3\@example.com/, "Adds multiple AdminCcs on move out of watched queue");
+
+# doesn't add a second copy of the first watcher
+my @matches = ($ticket_1->AdminCcAddresses =~ /watcher1\@example.com/g);
+ok(@matches == 1, "Doesn't add multiple copies of the same address");
 
 1;
