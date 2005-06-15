@@ -13,6 +13,31 @@ use_ok('RT::Action::AddQueueAdminCcs');
 
 my ($id, $message);
 
+# check if the action is installed and, if not, add it
+my $action = RT::ScripAction->new($RT::SystemUser);
+($id, $message) = $action->Load('AddQueueAdminCcs');
+if (!$id) {
+    ($id, $message) = $action->Create( Name => 'AddQueueAdminCcs',
+                                       Description => '',
+                                       ExecModule => 'AddQueueAdminCcs'
+                                     );
+}
+ok($id, "Loaded action? $message");
+
+# check if the scrip is installed and, if not, add it
+my $scrip = RT::Scrip->new($RT::SystemUser);
+($id, $message) = $scrip->Load('AddAdminCcsOnQueueChange');
+if (!$id) {
+    ($id, $message) = $scrip->Create( Description => 'AddAdminCcsOnQueueChange',
+                                      Queue => 0,
+                                      ScripCondition => 'On Queue Change',
+                                      ScripAction => 'AddQueueAdminCcs',
+                                      Template => 'Blank',
+                                      Stage => 'TransactionCreate'
+                                    );
+}
+ok($id, "Loaded scrip? $message");
+
 # create queues
 my $watched_queue = RT::Queue->new($RT::SystemUser);
 ($id, $message) = $watched_queue->Create( Name=>"Watched-$$" );
