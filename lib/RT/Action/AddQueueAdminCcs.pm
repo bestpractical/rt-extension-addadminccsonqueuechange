@@ -22,6 +22,12 @@ each principal (user or group) to the ticket's AdminCc watcher list
 iteratively.  RT's watcher-addition code takes care of preventing duplicate 
 principals from being added to the ticket.
 
+=head1 COPYRIGHT
+
+This extension is Copyright (C) 2005 Best Practical Solutions, LLC.
+
+It is freely redistributable under the terms of version 2 of the GNU GPL.
+
 =cut
 
 
