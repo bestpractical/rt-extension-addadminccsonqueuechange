@@ -1,4 +1,4 @@
-#line 1 "inc/Module/Install/RTx/Factory.pm - /usr/local/share/perl/5.8.4/Module/Install/RTx/Factory.pm"
+#line 1
 package Module::Install::RTx::Factory;
 use Module::Install::Base; @ISA = qw(Module::Install::Base);
 
@@ -11,6 +11,8 @@ sub RTxInitDB {
     unshift @INC, substr(delete($INC{'RT.pm'}), 0, -5) if $INC{'RT.pm'};
 
     require RT;
+    unshift @INC, "$RT::LocalPath/lib" if $RT::LocalPath;
+
     $RT::SbinPath ||= $RT::LocalPath;
     $RT::SbinPath =~ s/local$/sbin/;
 
@@ -22,12 +24,14 @@ sub RTxInitDB {
     RT::LoadConfig();
 
     my $lib_path = File::Basename::dirname($INC{'RT.pm'});
-    my @args = (
-        "-Ilib", "-I$lib_path",
+    my @args = ("-Ilib");
+    push @args, "-I$RT::LocalPath/lib" if $RT::LocalPath;
+    push @args, (
+        "-I$lib_path",
         "$RT::SbinPath/rt-setup-database",
         "--action"      => $action,
         "--datadir"     => "etc",
-        "--datafile"    => "etc/initialdata",
+        (($action eq 'insert') ? ("--datafile"    => "etc/initialdata") : ()),
         "--dba"         => $RT::DatabaseUser,
         "--prompt-for-dba-password" => ''
     );
