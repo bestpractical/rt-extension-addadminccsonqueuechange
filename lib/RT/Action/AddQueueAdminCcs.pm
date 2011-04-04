@@ -35,7 +35,7 @@ use warnings;
 use strict;
 
 package RT::Action::AddQueueAdminCcs;
-use base qw/RT::Action::Generic/;
+use base qw/RT::Action/;
 
 # add the queue's AdminCcs to the ticket's AdminCcs
 

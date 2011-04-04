@@ -1,6 +1,6 @@
 # the install script will use this to add the action and scrip to RT's database
 
-@Actions= ( 
+@ScripActions= ( 
     {
         Name => 'Add Queue AdminCcs to Ticket',
         Description => "adds the queue's AdminCcs as ticket AdminCcs",
