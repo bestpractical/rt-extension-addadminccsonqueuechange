@@ -15,4 +15,4 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml
 README
-t/01-require.t
+xt/01-require.t
