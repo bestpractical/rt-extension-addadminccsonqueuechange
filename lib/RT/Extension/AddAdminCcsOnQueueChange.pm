@@ -8,6 +8,6 @@ It is freely redistributable under the terms of version 2 of the GNU GPL.
 
 package RT::Extension::AddAdminCcsOnQueueChange;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 1;
