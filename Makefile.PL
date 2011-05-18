@@ -8,4 +8,5 @@ abstract        ('On queue change, adds queue AdminCcs as ticket AdminCcs');
 author          ('Kevin Riggle <kevinr@bestpractical.com>');
 license         ('GPL version 2');
 
+sign;
 &WriteAll;
